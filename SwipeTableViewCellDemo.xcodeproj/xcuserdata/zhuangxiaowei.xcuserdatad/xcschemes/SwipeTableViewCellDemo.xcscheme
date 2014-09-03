@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB519F3619B6F3A400C01EF4"
+               BuildableName = "SwipeTableViewCellDemo.app"
+               BlueprintName = "SwipeTableViewCellDemo"
+               ReferencedContainer = "container:SwipeTableViewCellDemo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -12,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB519F5719B6F3A500C01EF4"
+               BuildableName = "SwipeTableViewCellDemoTests.xctest"
+               BlueprintName = "SwipeTableViewCellDemoTests"
+               ReferencedContainer = "container:SwipeTableViewCellDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EB519F3619B6F3A400C01EF4"
+            BuildableName = "SwipeTableViewCellDemo.app"
+            BlueprintName = "SwipeTableViewCellDemo"
+            ReferencedContainer = "container:SwipeTableViewCellDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -23,6 +58,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EB519F3619B6F3A400C01EF4"
+            BuildableName = "SwipeTableViewCellDemo.app"
+            BlueprintName = "SwipeTableViewCellDemo"
+            ReferencedContainer = "container:SwipeTableViewCellDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -32,6 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EB519F3619B6F3A400C01EF4"
+            BuildableName = "SwipeTableViewCellDemo.app"
+            BlueprintName = "SwipeTableViewCellDemo"
+            ReferencedContainer = "container:SwipeTableViewCellDemo.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

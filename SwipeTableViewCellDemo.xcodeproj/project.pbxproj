@@ -21,6 +21,7 @@
 		EB519F5C19B6F3A500C01EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB519F3E19B6F3A400C01EF4 /* UIKit.framework */; };
 		EB519F6419B6F3A500C01EF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB519F6219B6F3A500C01EF4 /* InfoPlist.strings */; };
 		EB519F6619B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB519F6519B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m */; };
+		EB519F7219B6FCFC00C01EF4 /* SwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB519F7119B6FCFC00C01EF4 /* SwipeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		EB519F6119B6F3A500C01EF4 /* SwipeTableViewCellDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SwipeTableViewCellDemoTests-Info.plist"; sourceTree = "<group>"; };
 		EB519F6319B6F3A500C01EF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB519F6519B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwipeTableViewCellDemoTests.m; sourceTree = "<group>"; };
+		EB519F7019B6FCFC00C01EF4 /* SwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeTableViewCell.h; path = SwipeTableViewCell/SwipeTableViewCell.h; sourceTree = "<group>"; };
+		EB519F7119B6FCFC00C01EF4 /* SwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeTableViewCell.m; path = SwipeTableViewCell/SwipeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 		EB519F2E19B6F3A400C01EF4 = {
 			isa = PBXGroup;
 			children = (
+				EB519F6F19B6FC7000C01EF4 /* SwipeTableViewCell */,
 				EB519F4019B6F3A400C01EF4 /* SwipeTableViewCellDemo */,
 				EB519F5F19B6F3A500C01EF4 /* SwipeTableViewCellDemoTests */,
 				EB519F3919B6F3A400C01EF4 /* Frameworks */,
@@ -150,6 +154,15 @@
 				EB519F6219B6F3A500C01EF4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB519F6F19B6FC7000C01EF4 /* SwipeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB519F7019B6FCFC00C01EF4 /* SwipeTableViewCell.h */,
+				EB519F7119B6FCFC00C01EF4 /* SwipeTableViewCell.m */,
+			);
+			name = SwipeTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,7 @@
 			files = (
 				EB519F5119B6F3A400C01EF4 /* ViewController.m in Sources */,
 				EB519F4B19B6F3A400C01EF4 /* AppDelegate.m in Sources */,
+				EB519F7219B6FCFC00C01EF4 /* SwipeTableViewCell.m in Sources */,
 				EB519F4719B6F3A400C01EF4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
