@@ -1,0 +1,4 @@
+SwipeTableViewCell
+==================
+
+a SwipeTableViewCell
