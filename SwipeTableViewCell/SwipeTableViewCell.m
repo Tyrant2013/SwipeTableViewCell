@@ -107,8 +107,8 @@
     else
     {
         CGFloat x = CGRectGetMinX(self.contentView.frame);
-        if ((x >= 0.0 && (self.revealDirection == SwipeTableViewCellRevealDirectionLeft))
-            || (x <= 0.0f && (self.revealDirection == SwipeTableViewCellRevealDirectionRight)))
+        if ((x >= 0.0 && (self.revealDirection == SwipeTableViewCellRevealDirectionRight))
+            || (x <= 0.0f && (self.revealDirection == SwipeTableViewCellRevealDirectionLeft)))
         {
             CGRect frame = self.contentView.frame;
             frame.origin.x = 0;
