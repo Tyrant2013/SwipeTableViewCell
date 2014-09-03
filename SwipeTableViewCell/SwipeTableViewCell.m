@@ -41,10 +41,11 @@
     
     self.hiddenElementWidth = 80;
     self.startOffset = SwipeTableViewCellStartOffsetNone;
+    self.revealDirection = SwipeTableViewCellRevealDirectionBoth;
     self.animationDuration = 0.1f;
     
     UIView *backView = [[UIView alloc] initWithFrame:self.frame];
-    backView.backgroundColor = UIColor.lightGrayColor;
+    backView.backgroundColor = UIColor.whiteColor;
     [self addSubview:backView];
     [self sendSubviewToBack:backView];
     self.backView = backView;
@@ -56,7 +57,15 @@
 {
     CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view];
     CGPoint velocity = [gestureRecognizer velocityInView:gestureRecognizer.view];
-
+    if (self.startOffset == SwipeTableViewCellStartOffsetNone)
+    {
+        if ((translation.x < 0.0f && self.revealDirection == SwipeTableViewCellRevealDirectionLeft)
+            || (translation.x > 0.0 && self.revealDirection == SwipeTableViewCellRevealDirectionRight)
+            || self.revealDirection == SwipeTableViewCellRevealDirectionNone)
+        {
+            return;
+        }
+    }
     switch (gestureRecognizer.state)
     {
         case UIGestureRecognizerStateBegan:
@@ -75,7 +84,15 @@
 
 - (void)startAnimateWithOffset:(CGFloat)offset velocity:(CGPoint)velocity
 {
-//    CGFloat startPox = CGRectGetMinX(self.frame);
+    //    CGFloat startPox = CGRectGetMinX(self.frame);
+    if ([((NSObject *)self.delegate) respondsToSelector:@selector(swipeTableViewCell:shouldStartSwipeWithIndex:)])
+    {
+        UITableView *tableView = (UITableView *)self.superview.superview;
+        NSIndexPath *indexPath = nil;
+        if (tableView)
+            indexPath = [tableView indexPathForCell:self];
+        [self.delegate swipeTableViewCell:self shouldStartSwipeWithIndex:indexPath];
+    }
 }
 
 - (void)changingAnimateWithOffset:(CGFloat)offset velocity:(CGPoint)velocity
@@ -89,11 +106,21 @@
     }
     else
     {
-        if (self.startOffset == SwipeTableViewCellStartOffsetLeft)
-            offset = offset - (CGRectGetMinX(self.contentView.frame) + self.hiddenElementWidth);
+        CGFloat x = CGRectGetMinX(self.contentView.frame);
+        if ((x >= 0.0 && (self.revealDirection == SwipeTableViewCellRevealDirectionLeft))
+            || (x <= 0.0f && (self.revealDirection == SwipeTableViewCellRevealDirectionRight)))
+        {
+            CGRect frame = self.contentView.frame;
+            frame.origin.x = 0;
+            self.contentView.frame = frame;
+        }
         else
-            offset = offset + (self.hiddenElementWidth - CGRectGetMinX(self.contentView.frame));
-        self.contentView.frame = CGRectOffset(self.contentView.frame, offset, 0);
+        {
+            CGFloat maxMove = (self.startOffset == SwipeTableViewCellStartOffsetLeft ? -1 : 1) * self.hiddenElementWidth;
+            offset = offset - x + maxMove;
+            
+            self.contentView.frame = CGRectOffset(self.contentView.frame, offset, 0);
+        }
     }
 }
 

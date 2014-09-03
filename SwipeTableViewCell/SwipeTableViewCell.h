@@ -21,10 +21,21 @@ typedef NS_ENUM(NSUInteger, SwipeTableViewCellStartOffset) {
     SwipeTableViewCellStartOffsetRight = 1
 };
 
+@class SwipeTableViewCell;
+
+@protocol SwipeTableViewCellDelegate
+
+@optional
+- (void)swipeTableViewCell:(SwipeTableViewCell *)cell shouldStartSwipeWithIndex:(NSIndexPath *)indexPath;
+
+@end
+
 @interface SwipeTableViewCell : UITableViewCell <
   UIGestureRecognizerDelegate
 >
 
+@property (nonatomic, weak) id<SwipeTableViewCellDelegate> delegate;
+@property (nonatomic) NSInteger revealDirection;
 @property (nonatomic) CGFloat hiddenElementWidth;
 @property (nonatomic) NSInteger startOffset;
 @property (nonatomic) CGFloat animationDuration;
