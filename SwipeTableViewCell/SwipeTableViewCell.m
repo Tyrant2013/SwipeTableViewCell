@@ -63,6 +63,9 @@
             || (translation.x > 0.0 && self.revealDirection == SwipeTableViewCellRevealDirectionRight)
             || self.revealDirection == SwipeTableViewCellRevealDirectionNone)
         {
+            CGRect frame = self.contentView.frame;
+            frame.origin.x = 0;
+            self.contentView.frame = frame;
             return;
         }
     }
