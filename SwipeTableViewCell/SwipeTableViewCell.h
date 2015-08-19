@@ -8,37 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, SwipeTableViewCellRevealDirection) {
-    SwipeTableViewCellRevealDirectionNone = -1, // disables panning
-    SwipeTableViewCellRevealDirectionBoth = 0,
-    SwipeTableViewCellRevealDirectionRight = 1,
-    SwipeTableViewCellRevealDirectionLeft = 2,
+typedef NS_ENUM(NSInteger, SwipeTableViewCellDirection) {
+    SwipeTableViewCellDirectionNone,                    ///不可滑动
+    SwipeTableViewCellDirectionSingleLeft,              ///左边可滑动
+    SwipeTableViewCellDirectionSingleRight,             ///右边可滑动,
+    SwipeTableViewCellDirectionBoth                     ///两边都可滑动
 };
 
-typedef NS_ENUM(NSUInteger, SwipeTableViewCellStartOffset) {
-    SwipeTableViewCellStartOffsetNone = -1,
-    SwipeTableViewCellStartOffsetLeft = 0,
-    SwipeTableViewCellStartOffsetRight = 1
-};
+@interface SwipeTableViewCell : UITableViewCell
 
-@class SwipeTableViewCell;
+@property (nonatomic, assign) BOOL isSwiped;
+@property (nonatomic, assign) CGFloat maxRightOffsetX;
+@property (nonatomic, assign) CGFloat maxLeftOffsetX;
+@property (nonatomic, strong) UIView *foregroundContainerView;
+@property (nonatomic, strong) UIView *backgroundContainerView;
+@property (nonatomic, assign) SwipeTableViewCellDirection direction;
 
-@protocol SwipeTableViewCellDelegate
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier direction:(SwipeTableViewCellDirection)direction;
 
-@optional
-- (void)swipeTableViewCell:(SwipeTableViewCell *)cell shouldStartSwipeWithIndex:(NSIndexPath *)indexPath;
-
-@end
-
-@interface SwipeTableViewCell : UITableViewCell <
-  UIGestureRecognizerDelegate
->
-
-@property (nonatomic, weak) id<SwipeTableViewCellDelegate> delegate;
-@property (nonatomic) NSInteger revealDirection;
-@property (nonatomic) CGFloat hiddenElementWidth;
-@property (nonatomic) NSInteger startOffset;
-@property (nonatomic) CGFloat animationDuration;
-@property (nonatomic) UIView *backView;
+- (void)swipeOver;
 
 @end

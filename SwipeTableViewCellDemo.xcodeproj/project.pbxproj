@@ -22,6 +22,7 @@
 		EB519F6419B6F3A500C01EF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB519F6219B6F3A500C01EF4 /* InfoPlist.strings */; };
 		EB519F6619B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB519F6519B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m */; };
 		EB519F7219B6FCFC00C01EF4 /* SwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB519F7119B6FCFC00C01EF4 /* SwipeTableViewCell.m */; };
+		EB9ECF0C1B848AB800577E28 /* DEMOTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9ECF0B1B848AB800577E28 /* DEMOTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		EB519F6519B6F3A500C01EF4 /* SwipeTableViewCellDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwipeTableViewCellDemoTests.m; sourceTree = "<group>"; };
 		EB519F7019B6FCFC00C01EF4 /* SwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeTableViewCell.h; path = SwipeTableViewCell/SwipeTableViewCell.h; sourceTree = "<group>"; };
 		EB519F7119B6FCFC00C01EF4 /* SwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeTableViewCell.m; path = SwipeTableViewCell/SwipeTableViewCell.m; sourceTree = "<group>"; };
+		EB9ECF0A1B848AB800577E28 /* DEMOTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMOTableViewCell.h; sourceTree = "<group>"; };
+		EB9ECF0B1B848AB800577E28 /* DEMOTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMOTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				EB519F5019B6F3A400C01EF4 /* ViewController.m */,
 				EB519F5219B6F3A500C01EF4 /* Images.xcassets */,
 				EB519F4119B6F3A400C01EF4 /* Supporting Files */,
+				EB9ECF0A1B848AB800577E28 /* DEMOTableViewCell.h */,
+				EB9ECF0B1B848AB800577E28 /* DEMOTableViewCell.m */,
 			);
 			path = SwipeTableViewCellDemo;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB9ECF0C1B848AB800577E28 /* DEMOTableViewCell.m in Sources */,
 				EB519F5119B6F3A400C01EF4 /* ViewController.m in Sources */,
 				EB519F4B19B6F3A400C01EF4 /* AppDelegate.m in Sources */,
 				EB519F7219B6FCFC00C01EF4 /* SwipeTableViewCell.m in Sources */,
@@ -470,6 +476,7 @@
 				EB519F6B19B6F3A500C01EF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB519F6C19B6F3A500C01EF4 /* Build configuration list for PBXNativeTarget "SwipeTableViewCellDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +485,7 @@
 				EB519F6E19B6F3A500C01EF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

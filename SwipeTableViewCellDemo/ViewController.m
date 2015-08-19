@@ -7,12 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "SwipeTableViewCell.h"
+#import "DEMOTableViewCell.h"
 
 @interface ViewController ()<
   UITableViewDataSource,
-  UITableViewDelegate,
-  SwipeTableViewCellDelegate
+  UITableViewDelegate
 >
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,55 +49,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SwipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableViewCell" forIndexPath:indexPath];
-    cell.textLabel.text = self.array[indexPath.row];
-    cell.hiddenElementWidth = 80;
-    cell.delegate = self;
-    cell.revealDirection = SwipeTableViewCellRevealDirectionRight;
-    if (![cell.backView viewWithTag:11])
-    {
-        UIButton *btn = [self deleteButton:cell.hiddenElementWidth cellSize:cell.frame.size];
-        btn.tag = 11;
-        [cell.backView addSubview:btn];
-    }
+    DEMOTableViewCell *cell = (DEMOTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"tableViewCell" forIndexPath:indexPath];
+    cell.title.text = _array[indexPath.row];
+    cell.detail.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
 }
 
-- (UIButton *)deleteButton:(CGFloat)btnWidth cellSize:(CGSize)cellSize
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = (CGRect){cellSize.width - btnWidth, 0, btnWidth, cellSize.height};
-    button.backgroundColor = UIColor.redColor;
-    [button setTitle:@"Delete" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
-    return button;
-}
-
-- (void)deleteClick:(UIButton *)sender
-{
-    SwipeTableViewCell *cell =  (SwipeTableViewCell *)sender.superview.superview.superview;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    [self.array removeObjectAtIndex:indexPath.row];
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-    [self.tableView endUpdates];
-    self.selectedIndexPath = nil;
-}
-
-#pragma mark - SwipeTableViewCell delegate
-
-- (void)swipeTableViewCell:(SwipeTableViewCell *)cell shouldStartSwipeWithIndex:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == self.selectedIndexPath.section && indexPath.row == self.selectedIndexPath.row)
-    {
-        return;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DEMOTableViewCell *cell = (DEMOTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.isSwiped) {
+        [cell swipeOver];
     }
-    if (self.selectedIndexPath)
-    {
-        SwipeTableViewCell *selectedCell = (SwipeTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
-        selectedCell.selected = NO;
-    }
-    self.selectedIndexPath = indexPath;
 }
 
 @end
