@@ -44,80 +44,46 @@ static NSTimeInterval animationDuration = 0.25f;
     _direction = SwipeTableViewCellDirectionSingleRight;
     self.maxRightOffsetX = 100.0f;
     self.maxLeftOffsetX = 100.0f;
-    //    [self addBackgroundContainerView];
-    [self addForegroundContainerView];
-    [self.contentView bringSubviewToFront:self.foregroundContainerView];
-    self.foregroundContainerView.backgroundColor = [UIColor whiteColor];
-    self.contentView.backgroundColor = [UIColor lightGrayColor];
-    //    self.backgroundContainerView.backgroundColor = [UIColor lightGrayColor];
-}
-
-- (void)addForegroundContainerView {
-    UIView *containerView = [[UIView alloc] init];
+    [self addBackgroundContainerView];
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.backgroundContainerView.backgroundColor = [UIColor lightGrayColor];
     
-    [self.contentView addSubview:containerView];
-    self.foregroundContainerView = containerView;
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecogniser:)];
-    [containerView addGestureRecognizer:panGestureRecognizer];
-    
-    containerView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:containerView
-                                                               attribute:NSLayoutAttributeCenterX
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self.contentView
-                                                               attribute:NSLayoutAttributeCenterX
-                                                              multiplier:1
-                                                                constant:0];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:containerView
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.contentView
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:1
-                                                              constant:0];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:containerView
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.contentView
-                                                              attribute:NSLayoutAttributeHeight
-                                                             multiplier:1
-                                                               constant:0];
-    [self.contentView addConstraints:@[centerX, width, height]];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(panGestureRecogniser:)];
+    [self.contentView addGestureRecognizer:panGestureRecognizer];
 }
 
 - (void)addBackgroundContainerView {
     UIView *containerView = [[UIView alloc] init];
     
-    [self.contentView addSubview:containerView];
+    [self addSubview:containerView];
+    [self sendSubviewToBack:containerView];
     self.backgroundContainerView = containerView;
-    
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecogniser:)];
-    [containerView addGestureRecognizer:panGestureRecognizer];
     
     containerView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:containerView
                                                                attribute:NSLayoutAttributeCenterX
                                                                relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self.contentView
+                                                                  toItem:self
                                                                attribute:NSLayoutAttributeCenterX
                                                               multiplier:1
                                                                 constant:0];
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:containerView
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.contentView
+                                                                toItem:self
                                                              attribute:NSLayoutAttributeWidth
                                                             multiplier:1
                                                               constant:0];
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:containerView
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.contentView
+                                                                 toItem:self
                                                               attribute:NSLayoutAttributeHeight
                                                              multiplier:1
                                                                constant:0];
-    [self.contentView addConstraints:@[centerX, width, height]];
+    [self addConstraints:@[centerX, width, height]];
 }
 
 #pragma mark - swipe animation
@@ -131,7 +97,9 @@ static NSTimeInterval animationDuration = 0.25f;
     if (loc.x >= canNotMoveOffsetX
         && CGRectGetMinX(sender.view.frame) >= 0
         && self.direction == SwipeTableViewCellDirectionSingleRight) {
-        [self resetPositionToView:sender.view offsetX:loc.x resetCenter:self.contentView.center];
+        CGPoint resetCenter = self.center;
+        resetCenter.y = sender.view.center.y;
+        [self resetPositionToView:sender.view offsetX:loc.x resetCenter:resetCenter];
         return;
     }
     else if (loc.x <= -canNotMoveOffsetX
@@ -143,9 +111,6 @@ static NSTimeInterval animationDuration = 0.25f;
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:
         {
-            [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-            self.foregroundContainerView.backgroundColor = [UIColor whiteColor];
-            self.contentView.backgroundColor = [UIColor lightGrayColor];
             self.startLocation = attachedView.center;
             break;
         }
@@ -155,8 +120,12 @@ static NSTimeInterval animationDuration = 0.25f;
             break;
         }
         default:
-            [self resetPositionToView:attachedView offsetX:loc.x resetCenter:self.contentView.center];
+        {
+            CGPoint resetCenter = self.center;
+            resetCenter.y = attachedView.center.y;
+            [self resetPositionToView:attachedView offsetX:loc.x resetCenter:resetCenter];
             break;
+        }
     }
 }
 
@@ -165,7 +134,7 @@ static NSTimeInterval animationDuration = 0.25f;
     CGFloat curPositionX = CGRectGetMinX(view.frame);
     newCenter.x = self.startLocation.x + offsetX;
     newCenter.y = self.startLocation.y;
-    CGPoint center = self.contentView.center;
+    CGPoint center = self.center;
     
     CGFloat offsetCenterX = newCenter.x - center.x;
     BOOL canMove = NO;
@@ -285,7 +254,9 @@ static NSTimeInterval animationDuration = 0.25f;
 }
 
 - (void)swipeOver {
-    [self animateResetToOriginPosition:self.contentView.center view:self.foregroundContainerView];
+    CGPoint center = self.center;
+    center.y = self.contentView.center.y;
+    [self animateResetToOriginPosition:center view:self.contentView];
 }
 
 @end

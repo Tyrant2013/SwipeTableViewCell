@@ -28,12 +28,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     _array = [@[
-                @"This is something !",
-                @"Oh no!That is not my option!",
-                @"So!What do you want?",
-                @"Yes? Anything can i help you?",
-                @"Bye!Bye!"
+                @"Open Right",
+                @"Open Right!Again!",
+                @"Open Left",
+                @"Open Left!Again!",
+                @"Both Side!"
                ] mutableCopy];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,8 +51,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DEMOTableViewCell *cell = (DEMOTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"tableViewCell" forIndexPath:indexPath];
-    cell.title.text = _array[indexPath.row];
-    cell.detail.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    cell.textLabel.text = _array[indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    if (indexPath.row == 2 || indexPath.row == 3) {
+        cell.direction = SwipeTableViewCellDirectionSingleLeft;
+    }
+    else if (indexPath.row == 4) {
+        cell.direction = SwipeTableViewCellDirectionBoth;
+    }
     return cell;
 }
 
@@ -59,6 +66,9 @@
     DEMOTableViewCell *cell = (DEMOTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell.isSwiped) {
         [cell swipeOver];
+    }
+    else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 

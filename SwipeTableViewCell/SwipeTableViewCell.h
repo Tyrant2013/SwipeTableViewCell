@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, SwipeTableViewCellDirection) {
 @property (nonatomic, assign) BOOL isSwiped;
 @property (nonatomic, assign) CGFloat maxRightOffsetX;
 @property (nonatomic, assign) CGFloat maxLeftOffsetX;
-@property (nonatomic, strong) UIView *foregroundContainerView;
 @property (nonatomic, strong) UIView *backgroundContainerView;
 @property (nonatomic, assign) SwipeTableViewCellDirection direction;
 
